@@ -29,7 +29,7 @@ class _RegisterScreenState extends State<RegisterScreen> {
   List<String> neighborhoods = []; // Dynamic neighborhood list
 
   final String apiUrl =
-      "http://10.126.3.32:5000"; // Replace with your backend URL
+      "http://192.168.1.67:5000"; // Replace with your backend URL
 
   @override
   void initState() {
@@ -171,7 +171,7 @@ class _RegisterScreenState extends State<RegisterScreen> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      backgroundColor: Colors.white,
+      backgroundColor: Colors.blueGrey.shade900,
       appBar: AppBar(
         leading: IconButton(
           icon: const Icon(Icons.arrow_back, color: Colors.black),
@@ -183,7 +183,7 @@ class _RegisterScreenState extends State<RegisterScreen> {
           'Register',
           style: TextStyle(color: Colors.black),
         ),
-        backgroundColor: Colors.white,
+        backgroundColor: Colors.blueAccent,
         elevation: 0,
       ),
       body: Column(
@@ -218,7 +218,7 @@ class _RegisterScreenState extends State<RegisterScreen> {
                         child: Text(
                           "Fill in the details below to get started",
                           style: TextStyle(
-                            color: Colors.grey,
+                            color: Colors.white,
                             fontSize: 16,
                           ),
                           textAlign: TextAlign.center,
@@ -229,10 +229,14 @@ class _RegisterScreenState extends State<RegisterScreen> {
                         value: accountType,
                         items: const [
                           DropdownMenuItem(
-                              value: 'Personal', child: Text("Personal")),
-                          DropdownMenuItem(
-                              value: 'Business', child: Text("Business")),
-                        ],
+      value: 'Personal',
+      child: Text("Personal", style: TextStyle(color: Colors.white)),
+    ),
+    DropdownMenuItem(
+      value: 'Business',
+      child: Text("Business", style: TextStyle(color: Colors.white)),
+    ),
+  ],
                         onChanged: (value) {
                           setState(() {
                             accountType = value!;
@@ -240,6 +244,7 @@ class _RegisterScreenState extends State<RegisterScreen> {
                         },
                         decoration: InputDecoration(
                           labelText: 'Account Type',
+                          labelStyle: const TextStyle(color: Colors.white),
                           border: OutlineInputBorder(
                             borderRadius: BorderRadius.circular(8),
                           ),
@@ -248,16 +253,20 @@ class _RegisterScreenState extends State<RegisterScreen> {
                       const SizedBox(height: 15),
                       TextField(
                         controller: firstNameController,
+                        style: const TextStyle(color: Colors.white),
                         decoration: const InputDecoration(
                           labelText: 'First Name',
+                          labelStyle: TextStyle(color: Colors.white),
                           border: OutlineInputBorder(),
                         ),
                       ),
                       const SizedBox(height: 15),
                       TextField(
                         controller: lastNameController,
+                        style: const TextStyle(color: Colors.white),
                         decoration: const InputDecoration(
                           labelText: 'Last Name',
+                          labelStyle: TextStyle(color: Colors.white),
                           border: OutlineInputBorder(),
                         ),
                       ),
@@ -265,8 +274,10 @@ class _RegisterScreenState extends State<RegisterScreen> {
                       TextField(
                         controller: passwordController,
                         obscureText: true,
+                        style: const TextStyle(color: Colors.white),
                         decoration: const InputDecoration(
                           labelText: 'Password',
+                          labelStyle: TextStyle(color: Colors.white),
                           border: OutlineInputBorder(),
                         ),
                       ),
@@ -274,6 +285,7 @@ class _RegisterScreenState extends State<RegisterScreen> {
                       TextField(
                         controller: confirmPasswordController,
                         obscureText: true,
+                        style: const TextStyle(color: Colors.white),
                         decoration: const InputDecoration(
                           labelText: 'Confirm Password',
                           border: OutlineInputBorder(),
@@ -293,7 +305,7 @@ class _RegisterScreenState extends State<RegisterScreen> {
                         value: selectedDistrict,
                         items: districts.map((district) {
                           return DropdownMenuItem(
-                              value: district, child: Text(district));
+                              value: district, child: Text(district, style: const TextStyle(color: Colors.white)));
                         }).toList(),
                         onChanged: (value) {
                           setState(() {
@@ -304,6 +316,7 @@ class _RegisterScreenState extends State<RegisterScreen> {
                         },
                         decoration: InputDecoration(
                           labelText: 'District',
+                          labelStyle: const TextStyle(color: Colors.white),
                           border: OutlineInputBorder(
                             borderRadius: BorderRadius.circular(8),
                           ),
@@ -314,7 +327,7 @@ class _RegisterScreenState extends State<RegisterScreen> {
                         value: selectedNeighborhood,
                         items: neighborhoods.map((neighborhood) {
                           return DropdownMenuItem(
-                              value: neighborhood, child: Text(neighborhood));
+                              value: neighborhood, child: Text(neighborhood, style: const TextStyle(color: Colors.white)));
                         }).toList(),
                         onChanged: (value) {
                           setState(() {
@@ -323,6 +336,7 @@ class _RegisterScreenState extends State<RegisterScreen> {
                         },
                         decoration: InputDecoration(
                           labelText: 'Neighborhood',
+                          labelStyle: const TextStyle(color: Colors.white),
                           border: OutlineInputBorder(
                             borderRadius: BorderRadius.circular(8),
                           ),
@@ -331,8 +345,10 @@ class _RegisterScreenState extends State<RegisterScreen> {
                       const SizedBox(height: 15),
                       TextField(
                         controller: addressController,
+                        style: const TextStyle(color: Colors.white),
                         decoration: const InputDecoration(
                           labelText: 'Address',
+                          labelStyle: TextStyle(color: Colors.white),
                           border: OutlineInputBorder(),
                         ),
                       ),
@@ -348,16 +364,20 @@ class _RegisterScreenState extends State<RegisterScreen> {
                       const SizedBox(height: 15),
                       TextField(
                         controller: emailController,
+                        style: const TextStyle(color: Colors.white),
                         decoration: const InputDecoration(
                           labelText: 'Email Address',
+                          labelStyle: TextStyle(color: Colors.white),
                           border: OutlineInputBorder(),
                         ),
                       ),
                       const SizedBox(height: 10),
                       TextField(
                         controller: phoneController,
+                        style: const TextStyle(color: Colors.white),
                         decoration: const InputDecoration(
                           labelText: 'Phone Number',
+                          labelStyle: TextStyle(color: Colors.white),
                           border: OutlineInputBorder(),
                         ),
                       ),

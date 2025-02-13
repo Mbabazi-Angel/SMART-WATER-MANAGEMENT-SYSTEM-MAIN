@@ -24,7 +24,7 @@ class _AlertsPageState extends State<AlertsPage> {
   Future<List<Map<String, String>>> fetchAlerts() async {
     try {
       final response =
-          await http.get(Uri.parse('http://10.126.3.32:5000/alerts'));
+          await http.get(Uri.parse('http://10.2.13.115:5000/alerts'));
 
       if (response.statusCode == 200) {
         // Parse the response into a list of alerts
@@ -111,12 +111,13 @@ class _AlertsPageState extends State<AlertsPage> {
         ),
       ),
       bottomNavigationBar: BottomNavigationBar(
-        backgroundColor: Colors.white,
-        selectedItemColor: Colors.blueAccent,
-        unselectedItemColor: Colors.grey,
+        backgroundColor: Colors.blueAccent, // Set background to blue accent
+        selectedItemColor: Colors.white, // White for selected item
+        unselectedItemColor: Colors.white70, // Slightly faded white for unselected items
+        type: BottomNavigationBarType.fixed,
         currentIndex: 1, // Highlight Alerts (index = 1)
         items: const [
-          BottomNavigationBarItem(icon: Icon(Icons.home), label: "Home"),
+          BottomNavigationBarItem(icon: Icon(Icons.home), label: "Dashboard"),
           BottomNavigationBarItem(
               icon: Icon(Icons.notifications), label: "Alerts"),
           BottomNavigationBarItem(
@@ -145,7 +146,7 @@ class AlertCard extends StatelessWidget {
   final String message;
   final String timestamp;
 
-  const AlertCard({
+  const AlertCard({super.key, 
     required this.icon,
     required this.color,
     required this.message,

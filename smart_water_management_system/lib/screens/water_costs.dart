@@ -120,6 +120,7 @@ class _WaterCostsPageState extends State<WaterCostsPage> {
                   const Text(
                     "Daily Breakdown",
                     style: TextStyle(
+                      color: Colors.white,
                       fontSize: 16,
                       fontWeight: FontWeight.bold,
                     ),
@@ -209,6 +210,7 @@ class _WaterCostsPageState extends State<WaterCostsPage> {
       child: Text(
         text,
         textAlign: TextAlign.center,
+        style: const TextStyle(color: Colors.blueAccent),
       ),
     );
   }
@@ -219,7 +221,10 @@ class _WaterCostsPageState extends State<WaterCostsPage> {
       child: Text(
         text,
         textAlign: TextAlign.center,
-        style: const TextStyle(fontWeight: FontWeight.bold),
+        style: const TextStyle(
+          fontWeight: FontWeight.bold,
+          color: Colors.white, // White text
+        ),
       ),
     );
   }

@@ -27,7 +27,7 @@ class _SettingsPageState extends State<SettingsPage> {
     try {
       final response = await http.post(
         Uri.parse(
-            'http://10.126.3.32:5000/submit-feedback'), // Your server's URL
+            'http://10.2.13.115:5000/submit-feedback'), // Your server's URL
         headers: {'Content-Type': 'application/json'},
         body: json.encode({'content': feedback}),
       );
@@ -54,7 +54,7 @@ class _SettingsPageState extends State<SettingsPage> {
     try {
       final response = await http.post(
         Uri.parse(
-            'http://10.126.3.32:5000/submit-leakage-report'), // Your server's URL
+            'http://10.2.13.115:5000/submit-leakage-report'), // Your server's URL
         headers: {'Content-Type': 'application/json'},
         body: json.encode({'description': description}),
       );
@@ -167,7 +167,10 @@ class _SettingsPageState extends State<SettingsPage> {
                 children: [
                   const Text(
                     "Push Notifications",
-                    style: TextStyle(fontSize: 16, fontWeight: FontWeight.bold),
+                    style: TextStyle(
+                        fontSize: 16,
+                        fontWeight: FontWeight.bold,
+                        color: Colors.white),
                   ),
                   Switch(
                     value: pushNotifications,
@@ -186,7 +189,10 @@ class _SettingsPageState extends State<SettingsPage> {
                 children: [
                   const Text(
                     "SMS Alerts",
-                    style: TextStyle(fontSize: 16, fontWeight: FontWeight.bold),
+                    style: TextStyle(
+                        fontSize: 16,
+                        fontWeight: FontWeight.bold,
+                        color: Colors.white),
                   ),
                   Switch(
                     value: smsAlerts,
@@ -203,7 +209,10 @@ class _SettingsPageState extends State<SettingsPage> {
               // Language Settings
               const Text(
                 "Language Settings",
-                style: TextStyle(fontSize: 16, fontWeight: FontWeight.bold),
+                style: TextStyle(
+                    fontSize: 16,
+                    fontWeight: FontWeight.bold,
+                    color: Colors.white),
               ),
               const SizedBox(height: 10),
               DropdownButtonFormField<String>(
@@ -260,6 +269,7 @@ class _SettingsPageState extends State<SettingsPage> {
                       maxLines: 5,
                       decoration: const InputDecoration(
                         hintText: 'Write your feedback here...',
+                        hintStyle: TextStyle(color: Colors.white70),
                         border: OutlineInputBorder(),
                       ),
                     ),
@@ -313,6 +323,7 @@ class _SettingsPageState extends State<SettingsPage> {
                       maxLines: 5,
                       decoration: const InputDecoration(
                         hintText: 'Provide necessary specifications...',
+                        hintStyle: TextStyle(color: Colors.white70),
                         border: OutlineInputBorder(),
                       ),
                     ),
@@ -333,24 +344,30 @@ class _SettingsPageState extends State<SettingsPage> {
               // Help and Support
               const Text(
                 "Help & Support",
-                style: TextStyle(fontSize: 16, fontWeight: FontWeight.bold),
+                style: TextStyle(
+                    fontSize: 16,
+                    fontWeight: FontWeight.bold,
+                    color: Colors.white),
               ),
               const SizedBox(height: 10),
               Column(
                 children: [
                   ListTile(
-                    title: const Text("Call Us"),
-                    leading: const Icon(Icons.call),
+                    title: const Text("Call Us",
+                        style: TextStyle(color: Colors.white)),
+                    leading: const Icon(Icons.call, color: Colors.white),
                     onTap: _launchPhone,
                   ),
                   ListTile(
-                    title: const Text("Email Us"),
-                    leading: const Icon(Icons.email),
+                    title: const Text("Email Us",
+                        style: TextStyle(color: Colors.white)),
+                    leading: const Icon(Icons.email, color: Colors.white),
                     onTap: _launchEmail,
                   ),
                   ListTile(
-                    title: const Text("Text Support"),
-                    leading: const Icon(Icons.message),
+                    title: const Text("Text Support",
+                        style: TextStyle(color: Colors.white)),
+                    leading: const Icon(Icons.message, color: Colors.white),
                     onTap: _launchSMS,
                   ),
                 ],
@@ -379,11 +396,12 @@ class _SettingsPageState extends State<SettingsPage> {
         ),
       ),
       bottomNavigationBar: BottomNavigationBar(
-        backgroundColor: Colors.white,
-        selectedItemColor: Colors.blue,
-        unselectedItemColor: Colors.grey,
+        backgroundColor: Colors.blueAccent, // Set background to blue accent
+        selectedItemColor: Colors.white, // White for selected item
+        unselectedItemColor: Colors.white70, // Slightly faded white for unselected
+        type: BottomNavigationBarType.fixed,
         items: const [
-          BottomNavigationBarItem(icon: Icon(Icons.home), label: "Home"),
+          BottomNavigationBarItem(icon: Icon(Icons.home), label: "Dashboard"),
           BottomNavigationBarItem(
               icon: Icon(Icons.notifications), label: "Alerts"),
           BottomNavigationBarItem(

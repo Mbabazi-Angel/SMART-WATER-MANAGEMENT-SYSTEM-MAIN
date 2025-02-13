@@ -228,8 +228,8 @@ class _LegendItem {
   final String title;
   final bool isDashed;
 
-  _LegendItem(
-      {required this.color, required this.title, this.isDashed = false});
+  _LegendItem(this.isDashed, 
+      {required this.color, required this.title});
 }
 
 /// A widget to display a pie chart with a legend.
@@ -289,9 +289,9 @@ class DailyMetricsPieChart extends StatelessWidget {
     ];
 
     final legendItems = [
-      _LegendItem(color: Colors.blue, title: "Water Level"),
-      _LegendItem(color: Colors.tealAccent, title: "Water Flow"),
-      _LegendItem(color: Colors.orangeAccent, title: "Water Pressure"),
+      _LegendItem(false, color: Colors.blue, title: "Water Level"),
+      _LegendItem(false, color: Colors.tealAccent, title: "Water Flow"),
+      _LegendItem(false, color: Colors.orangeAccent, title: "Water Pressure"),
     ];
 
     return Column(
@@ -386,9 +386,9 @@ class WeekComparisonLineChart extends StatelessWidget {
           height: 300,
           child: LineChart(
             LineChartData(
-              gridData: FlGridData(show: true, drawVerticalLine: true),
+              gridData: const FlGridData(show: true, drawVerticalLine: true),
               titlesData: FlTitlesData(
-                leftTitles: AxisTitles(
+                leftTitles: const AxisTitles(
                   sideTitles: SideTitles(
                     showTitles: true,
                     reservedSize: 40,
@@ -435,7 +435,7 @@ class WeekComparisonLineChart extends StatelessWidget {
                   isCurved: true,
                   color: Colors.blue,
                   barWidth: 3,
-                  dotData: FlDotData(show: true),
+                  dotData: const FlDotData(show: true),
                 ),
                 // Last week's water level (dotted blue line)
                 LineChartBarData(
@@ -443,7 +443,7 @@ class WeekComparisonLineChart extends StatelessWidget {
                   isCurved: true,
                   color: Colors.blue,
                   barWidth: 3,
-                  dotData: FlDotData(show: true),
+                  dotData: const FlDotData(show: true),
                   dashArray: [8, 4],
                 ),
               ],
@@ -477,7 +477,7 @@ class WeekComparisonLineChart extends StatelessWidget {
             // Dotted line legend for Last Week.
             Row(
               children: [
-                DashedLine(
+                const DashedLine(
                   color: Colors.blue,
                   width: 40,
                   dashWidth: 8,
@@ -568,7 +568,7 @@ class _HomeScreenState extends State<HomeScreen> {
     try {
       // Replace with your API endpoint.
       final response =
-          await http.get(Uri.parse('http://10.2.1.130:5000/water-level'));
+          await http.get(Uri.parse('http://10.2.13.115:5000/water-level'));
 
       if (response.statusCode == 200) {
         final dynamic responseData = jsonDecode(response.body);
@@ -716,7 +716,7 @@ class _HomeScreenState extends State<HomeScreen> {
     return Scaffold(
       appBar: AppBar(
         title: Text(
-          "Analytics Dashboard",
+          "DASHBOARD",
           style: GoogleFonts.roboto(fontSize: 20, fontWeight: FontWeight.bold),
         ),
         centerTitle: true,
@@ -879,9 +879,10 @@ class _HomeScreenState extends State<HomeScreen> {
         ),
       ),
       bottomNavigationBar: BottomNavigationBar(
-        backgroundColor: Colors.white,
-        selectedItemColor: Colors.blueAccent,
-        unselectedItemColor: Colors.grey,
+        backgroundColor: Colors.blueAccent, // Set background to blue accent
+        selectedItemColor: Colors.white, // White for selected item
+        unselectedItemColor: Colors.white70, // Slightly faded white for unselected items
+        type: BottomNavigationBarType.fixed,
         items: const [
           BottomNavigationBarItem(icon: Icon(Icons.home), label: "Dashboard"),
           BottomNavigationBarItem(
@@ -951,7 +952,7 @@ class _HomeScreenState extends State<HomeScreen> {
         foregroundColor: Colors.white,
         shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(30)),
         minimumSize: const Size(120, 45),
-        textStyle: GoogleFonts.roboto(fontSize: 14),
+        textStyle: GoogleFonts.roboto(fontSize: 13),
       ),
     );
   }

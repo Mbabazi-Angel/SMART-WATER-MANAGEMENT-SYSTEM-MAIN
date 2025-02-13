@@ -21,9 +21,10 @@ class SmartWaterManagementApp extends StatelessWidget {
     return MaterialApp(
       title: 'Smart Water Management',
       theme: ThemeData(
+        scaffoldBackgroundColor: Colors.blueGrey.shade900
         // colorScheme: ColorScheme.fromSeed(seedColor: Colors.deepPurple),
         // useMaterial3: true,
-        primarySwatch: Colors.blue,
+        ,
       ),
       initialRoute: '/',
       routes: {

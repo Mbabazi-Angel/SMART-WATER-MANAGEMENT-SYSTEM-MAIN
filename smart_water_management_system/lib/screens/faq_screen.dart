@@ -12,27 +12,33 @@ class _FAQPageState extends State<FAQPage> {
   final List<Map<String, String>> faqs = [
     {
       "question": "How do I monitor my water usage?",
-      "answer": "You can monitor your usage on the home page under the usage stats section."
+      "answer":
+          "You can monitor your usage on the home page under the usage stats section."
     },
     {
       "question": "How are the water costs calculated?",
-      "answer": "Costs are based on the volume of water used and the current pricing rate."
+      "answer":
+          "Costs are based on the volume of water used and the current pricing rate."
     },
     {
       "question": "Can I download my water usage breakdown?",
-      "answer": "Yes, click on the download button in the daily breakdown section."
+      "answer":
+          "Yes, click on the download button in the daily breakdown section."
     },
     {
       "question": "What should I do if I detect a leak?",
-      "answer": "Use the report leakage option in the settings page to provide details about the leak."
+      "answer":
+          "Use the report leakage option in the settings page to provide details about the leak."
     },
     {
       "question": "How can I change my alert preferences?",
-      "answer": "Go to the settings page and toggle between push notifications and SMS alerts."
+      "answer":
+          "Go to the settings page and toggle between push notifications and SMS alerts."
     },
     {
       "question": "What happens during a water shortage?",
-      "answer": "You will receive an alert, and the app will provide conservation tips to manage your usage."
+      "answer":
+          "You will receive an alert, and the app will provide conservation tips to manage your usage."
     },
   ];
 
@@ -88,11 +94,13 @@ class _FAQPageState extends State<FAQPage> {
             TextField(
               decoration: InputDecoration(
                 hintText: "Search FAQs...",
-                prefixIcon: const Icon(Icons.search),
+                hintStyle: const TextStyle(color: Colors.white70), // White hint text
+                prefixIcon: const Icon(Icons.search, color: Colors.white),
                 border: OutlineInputBorder(
                   borderRadius: BorderRadius.circular(8),
                 ),
               ),
+              style: const TextStyle(color: Colors.white),
               onChanged: updateSearch,
             ),
             const SizedBox(height: 20),
@@ -105,6 +113,7 @@ class _FAQPageState extends State<FAQPage> {
                     title: Text(
                       filteredFaqs[index]["question"]!,
                       style: const TextStyle(
+                        color: Colors.white,
                         fontWeight: FontWeight.bold,
                       ),
                     ),
@@ -113,7 +122,7 @@ class _FAQPageState extends State<FAQPage> {
                         padding: const EdgeInsets.all(8.0),
                         child: Text(
                           filteredFaqs[index]["answer"]!,
-                          style: const TextStyle(color: Colors.black54),
+                          style: const TextStyle(color: Colors.white),
                         ),
                       ),
                     ],

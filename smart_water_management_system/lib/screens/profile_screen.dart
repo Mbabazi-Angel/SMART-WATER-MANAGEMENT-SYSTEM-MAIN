@@ -4,13 +4,14 @@ import 'package:http/http.dart' as http;
 import 'package:shared_preferences/shared_preferences.dart';
 
 class ProfilePage extends StatefulWidget {
-  const ProfilePage({Key? key}) : super(key: key);
+  const ProfilePage({super.key});
 
   @override
   State<ProfilePage> createState() => _ProfilePageState();
 }
 
 class _ProfilePageState extends State<ProfilePage> {
+  int _currentIndex = 3;
   bool isLoading = true;
   bool isEditing = false;
 
@@ -39,7 +40,7 @@ class _ProfilePageState extends State<ProfilePage> {
 
     try {
       final response = await http.get(
-        Uri.parse('http://10.2.1.130:5000/user-info'),
+        Uri.parse('http://10.2.13.115:5000/user-info'),
         headers: {
           'Content-Type': 'application/json',
           'Authorization': 'Bearer $token',
@@ -95,7 +96,7 @@ class _ProfilePageState extends State<ProfilePage> {
 
       // Send update request to the server
       final response = await http.put(
-        Uri.parse('http://10.2.1.130:5000/update-profile'),
+        Uri.parse('http://10.2.13.115:5000/update-profile'),
         headers: {
           'Content-Type': 'application/json',
           'Authorization': 'Bearer $token',
@@ -165,26 +166,33 @@ class _ProfilePageState extends State<ProfilePage> {
             children: [
               Text(
                 label,
-                style:
-                    const TextStyle(fontSize: 16, fontWeight: FontWeight.bold),
+                style: const TextStyle(
+                    fontSize: 16,
+                    fontWeight: FontWeight.bold,
+                    color: Colors.white),
               ),
               const SizedBox(height: 4),
               isEditing
                   ? SizedBox(
                       width: MediaQuery.of(context).size.width * 0.6,
                       child: TextField(
-                        controller: controller,
-                        autofocus: true,
-                        decoration: const InputDecoration(
-                          isDense: true,
-                          contentPadding: EdgeInsets.symmetric(vertical: 8),
-                          border: UnderlineInputBorder(),
-                        ),
-                      ),
-                    )
+                          controller: controller,
+                          autofocus: true,
+                          style: const TextStyle(color: Colors.white),
+                          decoration: const InputDecoration(
+                            isDense: true,
+                            contentPadding: EdgeInsets.symmetric(vertical: 8),
+                            border: UnderlineInputBorder(),
+                            enabledBorder: UnderlineInputBorder(
+                              borderSide: BorderSide(color: Colors.white),
+                            ),
+                            focusedBorder: UnderlineInputBorder(
+                              borderSide: BorderSide(color: Colors.white),
+                            ),
+                          )))
                   : Text(
                       controller.text,
-                      style: const TextStyle(fontSize: 16),
+                      style: const TextStyle(fontSize: 16, color: Colors.white),
                     ),
             ],
           ),
@@ -233,7 +241,9 @@ class _ProfilePageState extends State<ProfilePage> {
                       const Text(
                         "Account Information",
                         style: TextStyle(
-                            fontSize: 20, fontWeight: FontWeight.bold),
+                            fontSize: 20,
+                            fontWeight: FontWeight.bold,
+                            color: Colors.white),
                       ),
                       IconButton(
                         icon: Icon(
@@ -253,7 +263,10 @@ class _ProfilePageState extends State<ProfilePage> {
                   ),
                   const SizedBox(height: 10),
                   _buildProfileField(
-                      "First Name", Icons.person, firstNameController),
+                    "First Name",
+                    Icons.person,
+                    firstNameController,
+                  ),
                   _buildProfileField(
                       "Last Name", Icons.person, lastNameController),
                   _buildProfileField("Phone", Icons.phone, phoneController),
@@ -264,13 +277,13 @@ class _ProfilePageState extends State<ProfilePage> {
                   const SizedBox(height: 30),
                   ElevatedButton(
                     onPressed: _logout,
-                    child: const Text("Log Out"),
                     style: ElevatedButton.styleFrom(
                       backgroundColor: Colors.blueAccent,
                       shape: RoundedRectangleBorder(
                         borderRadius: BorderRadius.circular(30),
                       ),
                     ),
+                    child: const Text("Log Out"),
                   ),
                   const SizedBox(height: 20),
                   ElevatedButton.icon(
@@ -290,29 +303,39 @@ class _ProfilePageState extends State<ProfilePage> {
               ),
             ),
       bottomNavigationBar: BottomNavigationBar(
-        backgroundColor: Colors.white,
-        selectedItemColor: Colors.blueAccent,
-        unselectedItemColor: Colors.grey,
-        items: const [
-          BottomNavigationBarItem(icon: Icon(Icons.home), label: "Home"),
-          BottomNavigationBarItem(
-              icon: Icon(Icons.notifications), label: "Alerts"),
-          BottomNavigationBarItem(
-              icon: Icon(Icons.settings), label: "Settings"),
-          BottomNavigationBarItem(icon: Icon(Icons.person), label: "Profile"),
-        ],
-        onTap: (index) {
-          if (index == 0) {
-            Navigator.pushNamed(context, '/home');
-          } else if (index == 1) {
-            Navigator.pushNamed(context, '/alerts');
-          } else if (index == 2) {
-            Navigator.pushNamed(context, '/settings');
-          } else if (index == 3) {
-            Navigator.pushNamed(context, '/profile');
-          }
-        },
-      ),
+  currentIndex: _currentIndex,
+  backgroundColor: Colors.blueAccent,
+  selectedItemColor: Colors.white,
+  unselectedItemColor: Colors.white70,
+  type: BottomNavigationBarType.fixed, // Ensures labels are always visible
+  items: const [
+    BottomNavigationBarItem(icon: Icon(Icons.home), label: "Dashboard"),
+    BottomNavigationBarItem(icon: Icon(Icons.notifications), label: "Alerts"),
+    BottomNavigationBarItem(icon: Icon(Icons.settings), label: "Settings"),
+    BottomNavigationBarItem(icon: Icon(Icons.person), label: "Profile"),
+  ],
+  onTap: (index) {
+    setState(() {
+      _currentIndex = index; // Update the current index
+    });
+
+    switch (index) {
+      case 0:
+        Navigator.pushReplacementNamed(context, '/home');
+        break;
+      case 1:
+        Navigator.pushReplacementNamed(context, '/alerts');
+        break;
+      case 2:
+        Navigator.pushReplacementNamed(context, '/settings');
+        break;
+      case 3:
+        Navigator.pushReplacementNamed(context, '/profile');
+        break;
+    }
+  },
+),
+
     );
   }
 }
