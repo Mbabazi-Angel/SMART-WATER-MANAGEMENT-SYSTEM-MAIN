@@ -132,8 +132,8 @@ app.post('/login', (req, res) => {
 });
 
 // Start the server
-app.listen(PORT, "10.2.13.115", () => {
-  console.log(`Server is running on http://10.2.13.115:${PORT}`);
+app.listen(PORT, "172.20.10.3", () => {
+  console.log(`Server is running on http://172.20.10.3:${PORT}`);
 });
 
 
@@ -380,7 +380,6 @@ app.post('/sensor-data', (req, res) => {
   });
 });
 
-
 // Endpoint to get the latest sensor data (water level, usage, flow, pressure)
 app.get('/sensor-data', (req, res) => {
   const sql = 'SELECT * FROM sensor_data ORDER BY id DESC LIMIT 1'; // Fetch the latest sensor data
@@ -393,14 +392,16 @@ app.get('/sensor-data', (req, res) => {
       return res.status(404).json({ error: 'No sensor data available' });
     }
 
-    // Return the latest sensor data in the response
+    // Get the latest sensor data
     const latestData = results[0]; // The most recent record
+
+    // Return the latest sensor data in the response
     res.json({
-      sensor_id: latestData.sensor_id,
-      water_level: latestData.water_level,
-      water_usage: latestData.water_usage,
-      water_flow: latestData.water_flow,
-      water_pressure: latestData.water_pressure,
+      sensor_id: latestData.sensor_id || 'Unknown', // Default to 'Unknown' if null
+      water_level: latestData.water_level !== null ? latestData.water_level : 0, // Default to 0 if null
+      water_usage: latestData.water_usage !== null ? latestData.water_usage : 0, // Default to 0 if null
+      water_flow: latestData.water_flow !== null ? latestData.water_flow : 0, // Default to 0 if null
+      water_pressure: latestData.water_pressure !== null ? latestData.water_pressure : 0, // Default to 0 if null
     });
   });
 });

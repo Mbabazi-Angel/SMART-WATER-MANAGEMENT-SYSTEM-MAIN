@@ -40,7 +40,7 @@ class _ProfilePageState extends State<ProfilePage> {
 
     try {
       final response = await http.get(
-        Uri.parse('http://10.2.13.115:5000/user-info'),
+        Uri.parse('http://172.20.10.3:5000/user-info'),
         headers: {
           'Content-Type': 'application/json',
           'Authorization': 'Bearer $token',
@@ -303,39 +303,41 @@ class _ProfilePageState extends State<ProfilePage> {
               ),
             ),
       bottomNavigationBar: BottomNavigationBar(
-  currentIndex: _currentIndex,
-  backgroundColor: Colors.blueAccent,
-  selectedItemColor: Colors.white,
-  unselectedItemColor: Colors.white70,
-  type: BottomNavigationBarType.fixed, // Ensures labels are always visible
-  items: const [
-    BottomNavigationBarItem(icon: Icon(Icons.home), label: "Dashboard"),
-    BottomNavigationBarItem(icon: Icon(Icons.notifications), label: "Alerts"),
-    BottomNavigationBarItem(icon: Icon(Icons.settings), label: "Settings"),
-    BottomNavigationBarItem(icon: Icon(Icons.person), label: "Profile"),
-  ],
-  onTap: (index) {
-    setState(() {
-      _currentIndex = index; // Update the current index
-    });
+        currentIndex: _currentIndex,
+        backgroundColor: Colors.blueAccent,
+        selectedItemColor: Colors.white,
+        unselectedItemColor: Colors.white70,
+        type:
+            BottomNavigationBarType.fixed, // Ensures labels are always visible
+        items: const [
+          BottomNavigationBarItem(icon: Icon(Icons.home), label: "Dashboard"),
+          BottomNavigationBarItem(
+              icon: Icon(Icons.notifications), label: "Alerts"),
+          BottomNavigationBarItem(
+              icon: Icon(Icons.settings), label: "Settings"),
+          BottomNavigationBarItem(icon: Icon(Icons.person), label: "Profile"),
+        ],
+        onTap: (index) {
+          setState(() {
+            _currentIndex = index; // Update the current index
+          });
 
-    switch (index) {
-      case 0:
-        Navigator.pushReplacementNamed(context, '/home');
-        break;
-      case 1:
-        Navigator.pushReplacementNamed(context, '/alerts');
-        break;
-      case 2:
-        Navigator.pushReplacementNamed(context, '/settings');
-        break;
-      case 3:
-        Navigator.pushReplacementNamed(context, '/profile');
-        break;
-    }
-  },
-),
-
+          switch (index) {
+            case 0:
+              Navigator.pushReplacementNamed(context, '/home');
+              break;
+            case 1:
+              Navigator.pushReplacementNamed(context, '/alerts');
+              break;
+            case 2:
+              Navigator.pushReplacementNamed(context, '/settings');
+              break;
+            case 3:
+              Navigator.pushReplacementNamed(context, '/profile');
+              break;
+          }
+        },
+      ),
     );
   }
 }

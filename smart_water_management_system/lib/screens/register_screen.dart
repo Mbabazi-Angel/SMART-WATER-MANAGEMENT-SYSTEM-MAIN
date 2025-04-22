@@ -29,7 +29,7 @@ class _RegisterScreenState extends State<RegisterScreen> {
   List<String> neighborhoods = []; // Dynamic neighborhood list
 
   final String apiUrl =
-      "http://192.168.1.67:5000"; // Replace with your backend URL
+      "http://172.20.10.3:5000"; // Replace with your backend URL
 
   @override
   void initState() {
@@ -229,14 +229,16 @@ class _RegisterScreenState extends State<RegisterScreen> {
                         value: accountType,
                         items: const [
                           DropdownMenuItem(
-      value: 'Personal',
-      child: Text("Personal", style: TextStyle(color: Colors.white)),
-    ),
-    DropdownMenuItem(
-      value: 'Business',
-      child: Text("Business", style: TextStyle(color: Colors.white)),
-    ),
-  ],
+                            value: 'Personal',
+                            child: Text("Personal",
+                                style: TextStyle(color: Colors.black)),
+                          ),
+                          DropdownMenuItem(
+                            value: 'Business',
+                            child: Text("Business",
+                                style: TextStyle(color: Colors.black)),
+                          ),
+                        ],
                         onChanged: (value) {
                           setState(() {
                             accountType = value!;
@@ -288,6 +290,7 @@ class _RegisterScreenState extends State<RegisterScreen> {
                         style: const TextStyle(color: Colors.white),
                         decoration: const InputDecoration(
                           labelText: 'Confirm Password',
+                          labelStyle: TextStyle(color: Colors.white),
                           border: OutlineInputBorder(),
                         ),
                       ),
@@ -305,7 +308,9 @@ class _RegisterScreenState extends State<RegisterScreen> {
                         value: selectedDistrict,
                         items: districts.map((district) {
                           return DropdownMenuItem(
-                              value: district, child: Text(district, style: const TextStyle(color: Colors.white)));
+                              value: district,
+                              child: Text(district,
+                                  style: const TextStyle(color: Colors.white)));
                         }).toList(),
                         onChanged: (value) {
                           setState(() {
@@ -327,7 +332,9 @@ class _RegisterScreenState extends State<RegisterScreen> {
                         value: selectedNeighborhood,
                         items: neighborhoods.map((neighborhood) {
                           return DropdownMenuItem(
-                              value: neighborhood, child: Text(neighborhood, style: const TextStyle(color: Colors.white)));
+                              value: neighborhood,
+                              child: Text(neighborhood,
+                                  style: const TextStyle(color: Colors.white)));
                         }).toList(),
                         onChanged: (value) {
                           setState(() {

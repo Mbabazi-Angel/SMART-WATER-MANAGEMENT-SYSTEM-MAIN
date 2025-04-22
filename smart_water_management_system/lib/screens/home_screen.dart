@@ -228,8 +228,7 @@ class _LegendItem {
   final String title;
   final bool isDashed;
 
-  _LegendItem(this.isDashed, 
-      {required this.color, required this.title});
+  _LegendItem(this.isDashed, {required this.color, required this.title});
 }
 
 /// A widget to display a pie chart with a legend.
@@ -563,12 +562,11 @@ class _HomeScreenState extends State<HomeScreen> {
     super.dispose();
   }
 
-  /// Fetch sensor data from the API and update state.
   Future<void> fetchData() async {
     try {
       // Replace with your API endpoint.
       final response =
-          await http.get(Uri.parse('http://10.2.13.115:5000/water-level'));
+          await http.get(Uri.parse('http://172.20.10.3:5000/sensor-data'));
 
       if (response.statusCode == 200) {
         final dynamic responseData = jsonDecode(response.body);
@@ -608,7 +606,7 @@ class _HomeScreenState extends State<HomeScreen> {
         Map<int, List<double>> lastWeekLevels = {};
 
         for (var row in dataList) {
-          DateTime ts = DateTime.tryParse(row['timestamp']) ?? now;
+          DateTime ts = DateTime.tryParse(row['timestamp'] ?? '') ?? now;
           int usage = row['water_usage'] is int ? row['water_usage'] : 0;
 
           // Current day metrics.
@@ -668,6 +666,7 @@ class _HomeScreenState extends State<HomeScreen> {
         dailyWaterPressure = countPressure > 0 ? sumPressure : 0;
         dailyWaterLevel = countLevel > 0 ? (sumLevel / countLevel) : waterLevel;
 
+        // Fetch sensor data for sensor_10.
         final sensor10 = dataList.firstWhere(
             (row) => row['sensor_id'] == 'sensor_10',
             orElse: () => null);
@@ -881,7 +880,8 @@ class _HomeScreenState extends State<HomeScreen> {
       bottomNavigationBar: BottomNavigationBar(
         backgroundColor: Colors.blueAccent, // Set background to blue accent
         selectedItemColor: Colors.white, // White for selected item
-        unselectedItemColor: Colors.white70, // Slightly faded white for unselected items
+        unselectedItemColor:
+            Colors.white70, // Slightly faded white for unselected items
         type: BottomNavigationBarType.fixed,
         items: const [
           BottomNavigationBarItem(icon: Icon(Icons.home), label: "Dashboard"),
